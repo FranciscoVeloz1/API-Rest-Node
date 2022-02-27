@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const controller = require("../controllers/example.controller");
 const { authJwt } = require("../middleware/middlewares");
+const { verifyToken, isAdminIn } = authJwt;
 
 const router = Router();
 
@@ -11,8 +12,7 @@ const router = Router();
  *    summary: Listamos todos los tasks
  *    tags: [data]
  */
-// router.get("/tasks", [authJwt.verifyToken, authJwt.isAdminIn], controller.list);
-router.get("/tasks", controller.list);
+router.get("/tasks", [verifyToken, isAdminIn], controller.list);
 
 /**
  * @swagger
@@ -21,8 +21,7 @@ router.get("/tasks", controller.list);
  *    summary: Obtenemos solo un task
  *    tags: [data]
  */
-// router.get("/tasks/:id", [authJwt.verifyToken], controller.get);
-router.get("/tasks/:id", controller.get);
+router.get("/tasks/:id", [verifyToken], controller.get);
 
 /**
  * @swagger
