@@ -1,0 +1,3 @@
+npm install bcryptjs cors dotenv express jsonwebtoken morgan mysql swagger-jsdoc swagger-ui-express nodemailer
+
+npm install nodemon -D
