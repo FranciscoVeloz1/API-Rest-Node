@@ -59,7 +59,7 @@ controller.delete = async (req, res) => {
     const result = await service.Delete(id);
     if (!result.status) return res.status(400).json(result);
 
-    res.status(200).json({ status: false, message: "success" });
+    res.status(200).json({ status: true, message: "success" });
   } catch (error) {
     res.status(404).json({ status: false, message: error.message });
   }
