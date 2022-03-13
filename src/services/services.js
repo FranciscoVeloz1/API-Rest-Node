@@ -2,8 +2,9 @@ const pool = require("../lib/database");
 const helpers = require("../lib/helpers");
 
 class Services {
-  constructor(table) {
+  constructor(table, view = "") {
     this.table = table;
+    this.view = view;
   }
 
   async List() {
@@ -15,11 +16,31 @@ class Services {
     }
   }
 
+  async ListView() {
+    try {
+      const data = await pool.query(`select * from ${this.view}`);
+      return { status: true, data };
+    } catch (error) {
+      return { status: false, message: error.message };
+    }
+  }
+
   async Get(id) {
     try {
       const data = await pool.query(`select * from ${this.table} where id = ?`, [id]);
       if (data.length === 0) return { status: false, message: "not found" };
-      
+
+      return { status: true, data: data[0] };
+    } catch (error) {
+      return { status: false, message: error.message };
+    }
+  }
+
+  async GetView(id) {
+    try {
+      const data = await pool.query(`select * from ${this.view} where id = ?`, [id]);
+      if (data.length === 0) return { status: false, message: "not found" };
+
       return { status: true, data: data[0] };
     } catch (error) {
       return { status: false, message: error.message };
