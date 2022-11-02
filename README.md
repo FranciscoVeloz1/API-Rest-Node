@@ -1,3 +1,3 @@
-# rest-node-mysql
+# API-Rest-Node
 
-Template abour rest api
+API Rest programmed with Node.js, MySQL and JavaScript
